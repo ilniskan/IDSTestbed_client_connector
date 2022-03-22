@@ -1,6 +1,6 @@
 This in an initial version of the instructions that describe how to install and deploy an IDS dataspace connector instance. The connector can be connected to VTT's IDS tesbed and it can be used to test e.g. IDS based data retrieval.
 
-Prerequisites:  
+<b>Prerequisites: </b>
 
 The following software should be installed:
 
@@ -13,24 +13,24 @@ Ruby
 
 Installation:
 
-1. Clone the repository
+<b>1. Clone the repository and unzip the package</b>
 
 git clone  https://github.com/IlkkaNis/IDSTestbed_client_connector.git
 
-2. Unzip the package and navigate to IDSTestbed_client_connector/DataspaceConnector
+Unzip the package and navigate to IDSTestbed_client_connector/DataspaceConnector
 
-3. Build the connector
+<b>2. Build the connector</b>
 
 docker build -t dsca .
 
-4. Run the connector
+<b>3. Run the connector</b>
 
 docker run --publish 8081:8081 --name connectora dsca
 
-5. Open the swagger API
+<b>4. Open the swagger API</b>
 https://*yourURL*:8081/api/docs
 
-6. Test the connection to the testbed IDS connector
+<b>5. Test the connection to the testbed IDS connector</b>
 
 Navigate to: _Messaging -> POST /api/ids/description
 Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the The recipient url -field
@@ -41,19 +41,47 @@ Send the same request again but this time, add the resource catalogue URL into "
 
 Examine the results. You should see more information about the data resource offered by the connector hosted by VTT's IDS testbed
 
-8. Negotiate a contract to retrieve an example data resource
+<b>6. Negotiate a contract to retrieve an example data resource</b>
 
 Navigate to: _Messaging -> POST /api/ids/contract
 Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the The recipient url -field
 
-Next, define the data resource you would like to receive. First add the URL of the resource you are interested in. 
+Next, define the data resource you would like to receive. Add the URL of the resource you are interested in (e.g. https://broker.collab-cloud.eu:8081/api/offers/8df5375e-bbd1-449f-bb81-768e9c711d52) 
 NOTE! You can find all the required URLs from the response you received in the previous step.
 
+Next, add the URLs of the artifacts you would like to retrieve (e.g. https://broker.collab-cloud.eu:8081/api/artifacts/869a9f91-00da-42af-aa30-df70a8f0b201)
+
+For the automatic download section you can select "false"
+
+To retrieve the actual data from another container, you must accept the contract offer specified by the data provider. You can find the contract offer from the response of /api/ids/description
+
+To do so, copy the following statement into the "Request body" field of the /api/ids/contract:
+
+
+[
+  {
+  "@type" : "ids:Permission",
+  "@id" : "*URL of the permission as specified in the response of /api/ids/description (e.g. https://broker.collab-cloud.eu:8081/api/rules/8a0142db-b040-473e-a715-b2441af76de2)*",
+  "ids:description" : [ {
+  "@value" : "provide-access",
+  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:title" : [ {
+  "@value" : "Example Usage Policy",
+  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:action" : [ {
+  "@id" : "https://w3id.org/idsa/code/USE"
+  } ],
+  "ids:target": "*URL of the artifact you would like to receive*"
+  }
+]
+
+Finally, execute the request
 
 
 
-
-7. Test the connection to the testbed IDS broker
+<b> 7. Test the connection to the testbed IDS broker</b>
 
 Navigate to: _Messaging -> POST /api/ids/query
 Define "http://broker.collab-cloud.eu:8080/infrastructure" to the The recipient url -field

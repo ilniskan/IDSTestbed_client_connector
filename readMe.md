@@ -4,10 +4,10 @@ Prerequisites:
 
 The following software should be installed:
 
-Docker and docker compose
-Java 11
-Maven
-Python3 
+Docker and docker compose,
+Java 11,
+Maven,
+Python3,
 Ruby
 
 

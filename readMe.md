@@ -40,7 +40,7 @@ Next the different steps are explained in detail.
 - Navigate with your browser to https://*yourURL*:8081/api/docs
 
 <b>2.2 Retrieve connector metadata from the broker </b>
-- Navigate to: _Messaging -> POST /api/ids/query
+- In the swagger UI, navigate to:  _Messaging -> POST /api/ids/query
 - Define "http://broker.collab-cloud.eu:8080/infrastructure" to the The recipient url -field
 - Add "SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3id.org/idsa/core/hasDefaultEndpoint> ?x. ?x <https://w3id.org/idsa/core/accessURL> ?accessURL}" to the request body. This query will return the endpoints URLs of the connectors registered to the broker
 - From response, copy an endpoint URL to be used in the next step

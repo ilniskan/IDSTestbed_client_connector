@@ -29,37 +29,43 @@ docker run --publish 8081:8081 --name connectora dsca
 
 <h2> 2. Usage of the connector: </h2>
 
-<b>2.1 Open the swagger API</b>
-https://*yourURL*:8081/api/docs
+You can test the functionality of the connector by following the workflow shown in the picture below.
 
-<b>2.2 Test the connection to the testbed IDS connector</b>
+![Testbed workflow](https://github.com/IlkkaNis/IDSTestbed_client_connector/blob/main/testbed_workflow.png)
 
-Navigate to: _Messaging -> POST /api/ids/description
-Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the recipient url -field
+Next the different steps are explained in detail.
 
-Examine the results and find the URL endpoint for a data resource catalogue (e.g. https://broker.collab-cloud.eu:8081/api/catalogs/ba16f31a-7ff7-4fb4-aad6-9e4a5fcd0124) 
+<b>2.1 Open the swagger API </b>
 
-Send the same request again but this time, add the resource catalogue URL into the "id of the requested resource" -field. 
+- Navigate with your browser to https://*yourURL*:8081/api/docs
 
-Examine the results. You should see more information about the data resources offered by the connector deployed in the VTT's IDS testbed
+<b>2.2 Retrieve connector metadata from the broker </b>
+- Navigate to: _Messaging -> POST /api/ids/query
+- Define "http://broker.collab-cloud.eu:8080/infrastructure" to the The recipient url -field
+- Add "SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3id.org/idsa/core/hasDefaultEndpoint> ?x. ?x <https://w3id.org/idsa/core/accessURL> ?accessURL}" to the request body. This query will return the endpoints URLs of the connectors registered to the broker
+- From response, copy an endpoint URL to be used in the next step
 
-<b>2.3 Negotiate a contract to retrieve the example data resource</b>
+<b>2.3 Send description request message to the data provider connector </b>
+- Navigate to: _Messaging -> POST /api/ids/description
+- Define the URL you received as response in the previous step (2.2)to the recipient url -field ( i.e. "https://broker.collab-cloud.eu:8081/api/ids/data")
+- Examine the results and find the URL endpoint for a data resource catalogue (e.g. https://broker.collab-cloud.eu:8081/api/catalogs/ba16f31a-7ff7-4fb4-aad6-9e4a5fcd0124) 
+- Send the same request again but this time, add the resource catalogue URL into the "id of the requested resource" -field. 
+- Examine the results. You should see more information about the data resources offered by the connector deployed in the VTT's IDS testbed
 
-Navigate to: _Messaging -> POST /api/ids/contract
-Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the The recipient url -field
+<b>2.4 Negotiate a contract to retrieve the example data resource</b>
 
-Next, define the URL of the data resource you would like to receive (e.g. https://broker.collab-cloud.eu:8081/api/offers/8df5375e-bbd1-449f-bb81-768e9c711d52) 
-NOTE! You can find all the required information / URLs from the response you received in the previous step.
+- Navigate to: _Messaging -> POST /api/ids/contract and fill-in the required fields:
+- Define the testbed connector endpoint URL (i.e. "https://broker.collab-cloud.eu:8081/api/ids/data") to the The recipient url -field
+- Define the URL of the data resource you would like to receive (e.g. https://broker.collab-cloud.eu:8081/api/offers/8df5375e-bbd1-449f-bb81-768e9c711d52) <br><br>
+<b> NOTE! You can find all the required information / URLs from the response you received in the previous step </b><br><br>
+- Add the URLs of the artifacts you would like to retrieve (e.g. https://broker.collab-cloud.eu:8081/api/artifacts/869a9f91-00da-42af-aa30-df70a8f0b201)
+- In the automatic download section you can select "false"
 
-Next, add the URLs of the artifacts you would like to retrieve (e.g. https://broker.collab-cloud.eu:8081/api/artifacts/869a9f91-00da-42af-aa30-df70a8f0b201)
-
-In the automatic download section you can select "false"
-
-To retrieve the actual data from another container, you must accept the contract offer specified by the data provider. You can find the contract offer from the response of /api/ids/description
+- To retrieve data from another container, you must accept the contract offer specified by the data provider (i.e. IDS testbed connector). You can find the specified contract offer from the response of /api/ids/description (step 2.3). The contract definition must be added to the "Request body" field
 
 To do so, copy the following statement into the "Request body" field of the /api/ids/contract:
 
-
+```yaml
 [
   {
   "@type" : "ids:Permission",

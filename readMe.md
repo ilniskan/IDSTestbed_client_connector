@@ -94,7 +94,7 @@ SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3i
 
 - If the contract negotiation was successfull you will receive a response with the code "201". From the response body you should copy the URL that ends with the word "artifacts", e.g. "https://130.188.160.90:8081/api/agreements/3a4585cb-9119-4e39-ae8e-68eb773305d9/artifacts" (exclude the "{?page,size}" -part). 
 
-- Paste this URL into your web browser from the opened page click the link that ends with the word "data" e.g. 	"https://130.188.160.90:8081/api/artifacts/3b552084-a6cc-4845-8972-350647a624f2/data". This allows you to save and examine the data submitted by the data provider connector (i.e. the testbed connector). 
+- Paste this URL into your web browser and from the opened page click the link that ends with the word "data" e.g. 	"https://130.188.160.90:8081/api/artifacts/3b552084-a6cc-4845-8972-350647a624f2/data". This allows you to save and examine the data submitted by the data provider connector (i.e. the testbed connector). 
 
 
 

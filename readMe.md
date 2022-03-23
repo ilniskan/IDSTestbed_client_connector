@@ -11,47 +11,49 @@ Python3,
 Ruby
 
 
-Installation:
+<h2> 1. Installation: </h2>
 
-<b>1. Clone the repository and unzip the package</b>
+<b>1.1 Clone the repository and unzip the package</b>
 
 git clone  https://github.com/IlkkaNis/IDSTestbed_client_connector.git
 
 Unzip the package and navigate to IDSTestbed_client_connector/DataspaceConnector
 
-<b>2. Build the connector</b>
+<b>1.2 Build the connector</b>
 
 docker build -t dsca .
 
-<b>3. Run the connector</b>
+<b>1.3 Run the connector</b>
 
 docker run --publish 8081:8081 --name connectora dsca
 
-<b>4. Open the swagger API</b>
+<h2> 2. Usage of the connector: </h2>
+
+<b>2.1 Open the swagger API</b>
 https://*yourURL*:8081/api/docs
 
-<b>5. Test the connection to the testbed IDS connector</b>
+<b>2.2 Test the connection to the testbed IDS connector</b>
 
 Navigate to: _Messaging -> POST /api/ids/description
-Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the The recipient url -field
+Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the recipient url -field
 
 Examine the results and find the URL endpoint for a data resource catalogue (e.g. https://broker.collab-cloud.eu:8081/api/catalogs/ba16f31a-7ff7-4fb4-aad6-9e4a5fcd0124) 
 
-Send the same request again but this time, add the resource catalogue URL into "The id of the requested resource" field. 
+Send the same request again but this time, add the resource catalogue URL into the "id of the requested resource" -field. 
 
-Examine the results. You should see more information about the data resource offered by the connector hosted by VTT's IDS testbed
+Examine the results. You should see more information about the data resources offered by the connector deployed in the VTT's IDS testbed
 
-<b>6. Negotiate a contract to retrieve an example data resource</b>
+<b>2.3 Negotiate a contract to retrieve the example data resource</b>
 
 Navigate to: _Messaging -> POST /api/ids/contract
 Define "https://broker.collab-cloud.eu:8081/api/ids/data" to the The recipient url -field
 
-Next, define the data resource you would like to receive. Add the URL of the resource you are interested in (e.g. https://broker.collab-cloud.eu:8081/api/offers/8df5375e-bbd1-449f-bb81-768e9c711d52) 
-NOTE! You can find all the required URLs from the response you received in the previous step.
+Next, define the URL of the data resource you would like to receive (e.g. https://broker.collab-cloud.eu:8081/api/offers/8df5375e-bbd1-449f-bb81-768e9c711d52) 
+NOTE! You can find all the required information / URLs from the response you received in the previous step.
 
 Next, add the URLs of the artifacts you would like to retrieve (e.g. https://broker.collab-cloud.eu:8081/api/artifacts/869a9f91-00da-42af-aa30-df70a8f0b201)
 
-For the automatic download section you can select "false"
+In the automatic download section you can select "false"
 
 To retrieve the actual data from another container, you must accept the contract offer specified by the data provider. You can find the contract offer from the response of /api/ids/description
 

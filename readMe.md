@@ -42,11 +42,17 @@ Next the different steps are explained in detail.
 <b>2.2 Retrieve connector metadata from the broker </b>
 - In the swagger UI, navigate to:  _Messaging -> POST /api/ids/query
 - Define "http://broker.collab-cloud.eu:8080/infrastructure" to the The recipient url -field
-- Add "SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3id.org/idsa/core/hasDefaultEndpoint> ?x. ?x <https://w3id.org/idsa/core/accessURL> ?accessURL}" to the request body. This query will return the endpoints URLs of the connectors registered to the broker
-- From response, copy an endpoint URL to be used in the next step
+- Add the query statement shown below to the request body. This query will return the endpoints URLs of the connectors registered to the broker
+
+```yaml 
+SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3id.org/idsa/core/hasDefaultEndpoint> ?x. ?x <https://w3id.org/idsa/core/accessURL> ?accessURL} 
+```
+
+
+- From the response, copy an endpoint URL to be used in the next step
 
 <b>2.3 Send description request message to the data provider connector </b>
-- Navigate to: _Messaging -> POST /api/ids/description
+- Navigate to:  _Messaging -> POST /api/ids/description
 - Define the URL you received as response in the previous step (2.2)to the recipient url -field ( i.e. "https://broker.collab-cloud.eu:8081/api/ids/data")
 - Examine the results and find the URL endpoint for a data resource catalogue (e.g. https://broker.collab-cloud.eu:8081/api/catalogs/ba16f31a-7ff7-4fb4-aad6-9e4a5fcd0124) 
 - Send the same request again but this time, add the resource catalogue URL into the "id of the requested resource" -field. 
@@ -54,7 +60,7 @@ Next the different steps are explained in detail.
 
 <b>2.4 Negotiate a contract to retrieve the example data resource</b>
 
-- Navigate to: _Messaging -> POST /api/ids/contract and fill-in the required fields:
+- Navigate to:  _Messaging -> POST /api/ids/contract and fill-in the required fields:
 - Define the testbed connector endpoint URL (i.e. "https://broker.collab-cloud.eu:8081/api/ids/data") to the The recipient url -field
 - Define the URL of the data resource you would like to receive (e.g. https://broker.collab-cloud.eu:8081/api/offers/8df5375e-bbd1-449f-bb81-768e9c711d52) <br><br>
 <b> NOTE! You can find all the required information / URLs from the response you received in the previous step </b><br><br>

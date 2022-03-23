@@ -31,7 +31,7 @@ docker run --publish 8081:8081 --name connectora dsca
 
 You can test the functionality of the connector by following the workflow shown in the picture below.
 
-![Testbed workflow](https://github.com/IlkkaNis/IDSTestbed_client_connector/blob/main/testbed_workflow.png)
+![Testbed workflow](https://github.com/IlkkaNis/IDSTestbed_client_connector/blob/main/testbedworkflow.png)
 
 Next the different steps are explained in detail.
 

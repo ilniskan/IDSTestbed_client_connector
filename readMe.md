@@ -61,9 +61,7 @@ Next the different steps are explained in detail.
 - Add the URLs of the artifacts you would like to retrieve (e.g. https://broker.collab-cloud.eu:8081/api/artifacts/869a9f91-00da-42af-aa30-df70a8f0b201)
 - In the automatic download section you can select "false"
 
-- To retrieve data from another container, you must accept the contract offer specified by the data provider (i.e. IDS testbed connector). You can find the specified contract offer from the response of /api/ids/description (step 2.3). The contract definition must be added to the "Request body" field
-
-To do so, copy the following statement into the "Request body" field of the /api/ids/contract:
+- To retrieve data from another container, you must accept the contract offer specified by the data provider (i.e. IDS testbed connector). You can find the specified contract offer from the response of /api/ids/description (step 2.3). The contract definition must be added to the "Request body" field. In this case, the contract statement can be defined as in the example shown below (remember to add the correct URLs into the JSON structure):
 
 ```yaml
 [
@@ -84,16 +82,13 @@ To do so, copy the following statement into the "Request body" field of the /api
   "ids:target": "*URL of the artifact you would like to receive*"
   }
 ]
+```
 
-Finally, execute the request
+<b>2.5 Access the received data resource </b>
+If the contract negotiation was successfull you will receive a response with the code "200". From the response copy to URL...
 
 
 
-<b> 7. Test the connection to the testbed IDS broker</b>
-
-Navigate to: _Messaging -> POST /api/ids/query
-Define "http://broker.collab-cloud.eu:8080/infrastructure" to the The recipient url -field
-Add "select ?x ?t ?u where {?x ?t ?u}" to the request body
 
 
 

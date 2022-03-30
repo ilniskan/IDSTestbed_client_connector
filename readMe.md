@@ -96,7 +96,31 @@ SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3i
 
 - Paste this URL into your web browser and from the opened page click the link that ends with the word "data" e.g. 	"https://130.188.160.90:8081/api/artifacts/3b552084-a6cc-4845-8972-350647a624f2/data". This allows you to save and examine the data submitted by the data provider connector (i.e. the testbed connector). 
 
+<h2> 3. Using the connector as a data provider </h2>
 
+The testbed client connector can also be used as a data provider. This requires defining a data resource that can be requested by other connectors. The data structure used in the connector follows the data model shown below. 
+A more detailed description of the data model can be found, for example, at https://international-data-spaces-association.github.io/DataspaceConnector/Documentation/v6/DataModel
+
+![Connector data model](https://github.com/IlkkaNis/IDSTestbed_client_connector/blob/main/datamodel2.png)
+
+As can be seen in the picture, the highest element of the data model is "Catalog". A catalog can contain multiple data resources and it is the starting point when connectors start acquiring more information about 
+data elements provided by other connectors. "Data resource" can be described with a "Representation" that specifies, for example, the media type of a data resource. "Artifact" contains the actual "raw data" of the resource. An artifact also has a reference to an Agreement, 
+that describe the agreed usage between data provider and data consumer. Data resource must always be linked with a "Contract". A usage contract comprises a set of usage policies that describes a certain permission or obligation of a data resource. The policies are specified with "Rules", and each rule may represent one of pre-defined IDS Usage Control Patterns.
+
+Next, the creation of a new data resource using the Swagger API (https://*yourURL*:8081/api/docs) is explained 
+
+<b>3.1 Defining an artifact </b>
+
+- Navigate to:  Catalogs -> POST /api/catalogs and define a title and a description to the request body
+- Copy the catalog URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/catalogs/766e7048-66ad-4ece-9ed6-86eb4fb53773)
+
+<b>3.1 Defining a data resource </b>
+
+- Navigate to:  Offered Resources  -> POST /api/offers and define necessary data elements. Below is a concise example of the required request body
+```yaml
+{"title": "IDS data resource", "description": "Example IDS data resource", "keywords": ["data", "json","example","testing"], "sovereign": "https://www.example.com/", "publisher": "https://www.example.com/"}
+```
+- Copy the resource URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/offers/cf26d3ea-9899-4725-b83b-b07ca4158d9f)
 
 
 

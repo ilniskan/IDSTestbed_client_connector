@@ -118,7 +118,13 @@ Next, the creation of a new data resource using the Swagger API (https://*yourUR
 
 - Navigate to:  Offered Resources  -> POST /api/offers and define necessary data elements. Below is a concise example of the required request body
 ```yaml
-{"title": "IDS data resource", "description": "Example IDS data resource", "keywords": ["data", "json","example","testing"], "sovereign": "https://www.example.com/", "publisher": "https://www.example.com/"}
+{
+  "title": "IDS data resource", 
+  "description": "Example IDS data resource", 
+  "keywords": ["data", "json","example","testing"], 
+  "sovereign": "https://www.example.com/", 
+  "publisher": "https://www.example.com/"
+ }
 ```
 - Copy the resource URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/offers/cf26d3ea-9899-4725-b83b-b07ca4158d9f)
 

@@ -109,12 +109,12 @@ that describe the agreed usage between data provider and data consumer. Data res
 
 Next, the creation of a new data resource using the Swagger API (https://*yourURL*:8081/api/docs) is explained 
 
-<b>3.1 Defining an artifact </b>
+<b>3.1 Defining a catalog </b>
 
 - Navigate to:  Catalogs -> POST /api/catalogs and define a title and a description to the request body
 - Copy the catalog URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/catalogs/766e7048-66ad-4ece-9ed6-86eb4fb53773)
 
-<b>3.1 Defining a data resource </b>
+<b>3.2 Defining a data resource </b>
 
 - Navigate to:  Offered Resources  -> POST /api/offers and define necessary data elements. Below is a concise example of the required request body
 ```yaml
@@ -122,7 +122,33 @@ Next, the creation of a new data resource using the Swagger API (https://*yourUR
 ```
 - Copy the resource URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/offers/cf26d3ea-9899-4725-b83b-b07ca4158d9f)
 
+<b>3.3 Defining a representation </b>
 
+- Navigate to:  Representations  -> POST /api/representations and define necessary data elements. Below is a concise example of the required request body
+```yaml
+{
+  "title": "IDS representation",
+  "description": "Example representation of a data resource",
+  "mediaType": "json",
+  "language": "English"
+}
+```
+- Copy the representation URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/representations/9455a243-e35c-4cd0-83d7-12084f386a3c)
+
+<b>3.4 Defining a contract </b>
+
+- Navigate to:  Contracts -> POST /api/contracts and define necessary data elements. Below is a concise example of the required request body
+```yaml
+{
+  "title": "Example IDS contract",
+  "description": "This an example IDS contract",
+  "start": "2022-03-30T13:07:28.954Z",
+  "end": "2023-03-30T13:07:28.954Z"
+}
+```
+NOTE! If you preset the consumer attribute, the connector will compare this with the issuerConnector of an incoming contract request. If both values do not match, the contract request will be rejected. 
+
+- Copy the representation URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/contracts/ec380097-2b4d-4464-963b-71d3897112a9)
 
 
 

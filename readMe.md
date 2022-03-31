@@ -192,20 +192,25 @@ the execute button you should get the "204" response.
 <b>3.7 Link different elements with each other </b>
 To complete the data resource you should create linkages between different data elements (catalog, representation, artifact etc.)
 
-<b>3.7.1 Add resource to catalog </b>
-- Navigate Catalogs -> POST /api/catalogs/{id}/offers and add catalog id to the "id" field (e.g. 03774974-6892-49b4-b170-207a9b2347b5) and offer URL to the request body (e.g. "https://130.188.160.82:8081/api/offers/80213233-f20d-42ac-b15e-f5e9ee87665e")
+- Add resource to catalog 
+  - Navigate Catalogs -> POST /api/catalogs/{id}/offers 
+  - Add catalog id to the "id" field (e.g. 03774974-6892-49b4-b170-207a9b2347b5) and offer URL to the request body (e.g. "https://130.188.160.82:8081/api/offers/80213233-f20d-42ac-b15e-f5e9ee87665e")
 
-<b>3.7.2 Add representation to resource </b>
-- Navigate Offered Resources -> POST /api/offers/{id}/representations and add resource id (i.e. offer id) to the "id" field (e.g. 80213233-f20d-42ac-b15e-f5e9ee87665e) and representation URL to the request body (e.g. "https://130.188.160.82:8081/api/representations/5f69fc08-7efb-4980-8b28-4973a11331ca")
+- Add representation to resource 
+  - Navigate Offered Resources -> POST /api/offers/{id}/representations
+  - Add resource id (i.e. offer id) to the "id" field and representation URL to the request body (e.g. "https://130.188.160.82:8081/api/representations/5f69fc08-7efb-4980-8b28-4973a11331ca")
 
-<b>3.7.3 Add contract to resource </b>
-- Navigate Offered Resources -> POST /api/offers/{id}/contracts and add resource id (i.e. offer id) to the "id" field (e.g. 80213233-f20d-42ac-b15e-f5e9ee87665e) and contract URL to the request body (e.g. "https://130.188.160.82:8081/api/contracts/858a449d-25f4-42d1-bd29-ef12fe5d7106")
+- Add contract to resource 
+  - Navigate Offered Resources -> POST /api/offers/{id}/contracts
+  - Add resource id (i.e. offer id) to the "id" field and contract URL to the request body (e.g. "https://130.188.160.82:8081/api/contracts/858a449d-25f4-42d1-bd29-ef12fe5d7106")
 
 - Add rule to contract 
--- Navigate Contracts -> POST /api/contracts/{id}/rules and add contract id to the "id" field and rule URL to the request body (e.g. "https://130.188.160.82:8081/api/rules/b325c8e9-7cc0-4467-b0a7-268a69e59c90")
+  - Navigate Contracts -> POST /api/contracts/{id}/rules
+  - Add contract id to the "id" field and rule URL to the request body (e.g. "https://130.188.160.82:8081/api/rules/b325c8e9-7cc0-4467-b0a7-268a69e59c90")
 
 - Add artifact to representation 
--- Navigate Representation -> POST /api/representations/{id}/artifacts and add representation id to the "id" field and artifact URL to the request body (e.g. "https://130.188.160.82:8081/api/artifacts/df200253-7613-4e80-ba3d-d4d98a5bb2b3")
+  - Navigate Representation -> POST /api/representations/{id}/artifacts
+  - Add representation id to the "id" field and artifact URL to the request body (e.g. "https://130.188.160.82:8081/api/artifacts/df200253-7613-4e80-ba3d-d4d98a5bb2b3")
 
 
 

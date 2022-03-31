@@ -189,7 +189,8 @@ API key data into the request body).
 - Add a file to the artifact with PUT /api/artifacts/{id}/data. Define the id of the artifact you just created into the "id" field (e.g. "df200253-7613-4e80-ba3d-d4d98a5bb2b3") and select a file from your local file system. After pressing
 the execute button you should get the "204" response.
 
-<b>3.7 Link different elements with each other </b>
+<b> 3.7 Link different elements with each other </b>
+
 To complete the data resource you should create linkages between different data elements (catalog, representation, artifact etc.)
 
 - Add resource to catalog 

@@ -37,7 +37,7 @@ Next the different steps are explained in detail.
 
 <b>2.1 Open the swagger API </b>
 
-- Navigate with your browser to https://*yourURL*:8081/api/docs
+- Navigate with your browser to https://*yourURL*:8081/api/docs (Username = "admin", Password = "password")
 
 <b>2.2 Retrieve connector metadata from the broker </b>
 - In the swagger UI, navigate to:  _Messaging -> POST /api/ids/query
@@ -96,7 +96,7 @@ SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3i
 
 - Paste this URL into your web browser and from the opened page click the link that ends with the word "data" e.g. 	"https://130.188.160.90:8081/api/artifacts/3b552084-a6cc-4845-8972-350647a624f2/data". This allows you to save and examine the data submitted by the data provider connector (i.e. the testbed connector). 
 
-<h2> 3. Using the connector as a data provider </h2>
+<h2> 3. Using the connector as a data provider (work in progress) </h2>
 
 The testbed client connector can also be used as a data provider. This requires defining a data resource that can be requested by other connectors. The data structure used in the connector follows the data model shown below. 
 A more detailed description of the data model can be found, for example, at https://international-data-spaces-association.github.io/DataspaceConnector/Documentation/v6/DataModel
@@ -154,7 +154,21 @@ Next, the creation of a new data resource using the Swagger API (https://*yourUR
 ```
 NOTE! If you preset the consumer attribute, the connector will compare this with the issuerConnector of an incoming contract request. If both values do not match, the contract request will be rejected. 
 
-- Copy the representation URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/contracts/ec380097-2b4d-4464-963b-71d3897112a9)
+- Copy the contract URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/contracts/ec380097-2b4d-4464-963b-71d3897112a9)
+
+<b>3.5 Defining a rule </b>
+
+- Navigate to:  Rules -> POST /api/rules and define necessary data elements. Below is an example of the required request body
+```yaml
+{
+"title": "Example Rule Provide Access", 
+"description": "This is an example rule containing a provide access usage policy", 
+"value": "{\n \"@context\" : {\n \"ids\" : \"https://w3id.org/idsa/core/\",\n \"idsc\" : \"https://w3id.org/idsa/code/\"\n },\n \"@type\": \"ids:Permission\",\n \"@id\": \"https://w3id.org/idsa/autogen/permission/cf1cb758-b96d-4486-b0a7-f3ac0e289588\",\n \"ids:action\": [\n {\n \"@id\": \"idsc:USE\"\n }\n ],\n \"ids:description\": [\n {\n \"@value\": \"provide-access\",\n \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\n }\n ],\n \"ids:title\": [\n {\n \"@value\": \"Example Usage Policy\",\n \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\n }\n ]\n }"
+}
+```
+- Copy the rule URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/rules/b325c8e9-7cc0-4467-b0a7-268a69e59c90)
+
+
 
 
 

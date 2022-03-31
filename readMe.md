@@ -214,4 +214,6 @@ To complete the data resource you should create linkages between different data 
   - Add representation id to the "id" field and artifact URL to the request body (e.g. "https://130.188.160.82:8081/api/artifacts/df200253-7613-4e80-ba3d-d4d98a5bb2b3")
 
 
+<b> 3.7 Update connector data to broker (optional) </b>
+- Navigate to _Messaging -> POST /api/ids/connector/update and add broker URL to the "recipient URL" field
 

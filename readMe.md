@@ -7,9 +7,7 @@ The following software should be installed:
 Docker and docker compose,
 Java 11,
 Maven,
-Python3,
-Ruby
-
+Python3
 
 <h2> 1. Installation: </h2>
 
@@ -67,7 +65,7 @@ SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3i
 - Add the URLs of the artifacts you would like to retrieve (e.g. https://broker.collab-cloud.eu:8081/api/artifacts/869a9f91-00da-42af-aa30-df70a8f0b201)
 - In the automatic download section you can select "false"
 
-- To retrieve data from another container, you must accept the contract offer specified by the data provider (i.e. IDS testbed connector). You can find the specified contract offer from the response of /api/ids/description (step 2.3). The contract definition must be added to the "Request body" field. In this case, the contract statement can be defined as in the example shown below (remember to add the correct URLs into the JSON structure):
+- To retrieve data from another container, you must accept the contract offer specified by the data provider (i.e. IDS testbed connector). You can find the specified contract offer from the response of /api/ids/description (step 2.3). The contract definition must be added to the "Request body" field. In this case, the contract statement should be defined as in the example shown below (remember to add the correct URLs into the JSON structure):
 
 ```yaml
 [
@@ -169,6 +167,45 @@ NOTE! If you preset the consumer attribute, the connector will compare this with
 - Copy the rule URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/rules/b325c8e9-7cc0-4467-b0a7-268a69e59c90)
 
 
+<b>3.6 Defining the artifact </b>
+
+The connector enables defining different types of artifacts. Artifacts can consist, for example, arbitrary text strings, files or remote data that is acquired from external APIs. This example describes how
+to define an artifact that contains a file retrieved from a local file system. 
+
+
+- Navigate to:  Artifacts -> POST /api/artifact and define necessary data elements. Below is an example of the required request body (Please note that if you attach data from an external API you can include e.g. authorization or
+API key data into the request body).
+ 
+```yaml
+{
+  "title": "MyTestArtifact",
+  "description": "This is an example artifact that contains an json file  ",
+  "automatedDownload": "false"
+}
+
+```
+- Copy the artifact URL from the response to be used in later phases (e.g. https://130.188.160.82:8081/api/rules/b325c8e9-7cc0-4467-b0a7-268a69e59c90)
+
+- Add a file to the artifact with PUT /api/artifacts/{id}/data. Define the id of the artifact you just created into the "id" field (e.g. "df200253-7613-4e80-ba3d-d4d98a5bb2b3") and select a file from your local file system. After pressing
+the execute button you should get the "204" response.
+
+<b>3.7 Link different elements with each other </b>
+To complete the data resource you should create linkages between different data elements (catalog, representation, artifact etc.)
+
+<b>3.7.1 Add resource to catalog </b>
+- Navigate Catalogs -> POST /api/catalogs/{id}/offers and add catalog id to the "id" field (e.g. 03774974-6892-49b4-b170-207a9b2347b5) and offer URL to the request body (e.g. "https://130.188.160.82:8081/api/offers/80213233-f20d-42ac-b15e-f5e9ee87665e")
+
+<b>3.7.2 Add representation to resource </b>
+- Navigate Offered Resources -> POST /api/offers/{id}/representations and add resource id (i.e. offer id) to the "id" field (e.g. 80213233-f20d-42ac-b15e-f5e9ee87665e) and representation URL to the request body (e.g. "https://130.188.160.82:8081/api/representations/5f69fc08-7efb-4980-8b28-4973a11331ca")
+
+<b>3.7.3 Add contract to resource </b>
+- Navigate Offered Resources -> POST /api/offers/{id}/contracts and add resource id (i.e. offer id) to the "id" field (e.g. 80213233-f20d-42ac-b15e-f5e9ee87665e) and contract URL to the request body (e.g. "https://130.188.160.82:8081/api/contracts/858a449d-25f4-42d1-bd29-ef12fe5d7106")
+
+- Add rule to contract 
+-- Navigate Contracts -> POST /api/contracts/{id}/rules and add contract id to the "id" field and rule URL to the request body (e.g. "https://130.188.160.82:8081/api/rules/b325c8e9-7cc0-4467-b0a7-268a69e59c90")
+
+- Add artifact to representation 
+-- Navigate Representation -> POST /api/representations/{id}/artifacts and add representation id to the "id" field and artifact URL to the request body (e.g. "https://130.188.160.82:8081/api/artifacts/df200253-7613-4e80-ba3d-d4d98a5bb2b3")
 
 
 

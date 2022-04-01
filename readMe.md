@@ -19,7 +19,7 @@ Unzip the package and navigate to IDSTestbed_client_connector/DataspaceConnector
 
 <b>1.2 Build the connector</b>
 
-docker build -t dsca .
+docker build -t dsca . (NOTE: In Linux environment you may need to add "sudo")
 
 <b>1.3 Run the connector</b>
 
@@ -31,12 +31,11 @@ You can test the functionality of the connector by following the workflow shown 
 
 ![Testbed workflow](https://github.com/IlkkaNis/IDSTestbed_client_connector/blob/main/testbedworkflow.png)
 
-Next the different steps are explained in detail.
+Next the different steps are explained in detail (in this version the Broker part is excluded). 
 
 <b>2.1 Open the swagger API </b>
 
-- Navigate with your browser to https://*yourURL*:8081/api/docs (Username = "admin", Password = "password")
-
+- Navigate with your browser to https://*yourURL*:8081/api/docs (Username = "admin", Password = "password") (Tested with Mozilla Firefox, you may need to manually allow entering the website)
 
 <b>2.2 Send description request message to the data provider connector </b>
 - Navigate to:  _Messaging -> POST /api/ids/description

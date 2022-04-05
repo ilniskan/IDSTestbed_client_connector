@@ -19,12 +19,16 @@ Unzip the package and navigate to IDSTestbed_client_connector/DataspaceConnector
 
 <b>1.2 Build the connector</b>
 
-docker build -t dsca . (NOTE: In Linux environment you may need to add "sudo")
+```yaml
+
+docker build -t dsca . 
+```
+(NOTE: In Linux environment you may need to add "sudo")
 
 <b>1.3 Run the connector</b>
-
+```yaml
 docker run --publish 8081:8081 --name connectora dsca
-
+```
 <h2> 2. Usage of the connector: </h2>
 
 You can test the functionality of the connector by following the workflow shown in the picture below.

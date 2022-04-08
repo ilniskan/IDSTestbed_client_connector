@@ -39,16 +39,27 @@ Next the different steps are explained in detail (in this version the Broker par
 
 <b>2.1 Open the swagger API </b>
 
-- Navigate with your browser to https://*yourURL*:8081/api/docs (Username = "admin", Password = "password") (Tested with Mozilla Firefox, you may need to manually allow entering the website)
+- Navigate with your browser to https://*yourURL*:8081/api/docs (Username = "admin", Password = "password") (Tested with Mozilla Firefox, you may need to manually allow entering the website. Additionally, you may need to manually set permission in your web browser to access the page).
 
-<b>2.2 Send description request message to the data provider connector </b>
+<b>2.2 Retrieve connector metadata from the broker </b>
+- In the swagger UI, navigate to:  _Messaging -> POST /api/ids/query
+- Define "http://broker.collab-cloud.eu:8080/infrastructure" to the The recipient url -field
+- Add the query statement shown below to the request body. This query will return the endpoints URLs of the connectors registered to the broker
+
+```yaml 
+SELECT ?accessURL WHERE {<https://localhost/connectors/-1475001399> <https://w3id.org/idsa/core/hasDefaultEndpoint> ?x. ?x <https://w3id.org/idsa/core/accessURL> ?accessURL} 
+```
+
+- From the response, copy an endpoint URL to be used in the next step
+
+<b>2.3 Send description request message to the data provider connector </b>
 - Navigate to:  _Messaging -> POST /api/ids/description
 - Define the endpoint URL of the connector hosted by the VTT testbed (i.e. "https://broker.collab-cloud.eu:8081/api/ids/data")
 - Examine the results and find the URL endpoint for a data resource catalogue (e.g. https://broker.collab-cloud.eu:8081/api/catalogs/ba16f31a-7ff7-4fb4-aad6-9e4a5fcd0124) 
 - Send the same request again but this time, add the resource catalogue URL into the "id of the requested resource" -field. 
 - Examine the results. You should see more information about the data resources offered by the connector deployed in the VTT's IDS testbed
 
-<b>2.3 Negotiate a contract to retrieve the example data resource</b>
+<b>2.4 Negotiate a contract to retrieve the example data resource</b>
 
 - Navigate to:  _Messaging -> POST /api/ids/contract and fill-in the required fields:
 - Define the testbed connector endpoint URL (i.e. "https://broker.collab-cloud.eu:8081/api/ids/data") to the The recipient url -field
@@ -80,7 +91,7 @@ Next the different steps are explained in detail (in this version the Broker par
 ]
 ```
 
-<b>2.4 Access the received data resource </b>
+<b>2.5 Access the received data resource </b>
 
 - If the contract negotiation was successfull you will receive a response with the code "201". From the response body you should copy the URL that ends with the word "artifacts", e.g. "https://130.188.160.90:8081/api/agreements/3a4585cb-9119-4e39-ae8e-68eb773305d9/artifacts" (exclude the "{?page,size}" -part). 
 
